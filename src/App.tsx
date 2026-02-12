@@ -1,4 +1,4 @@
-import Hero from "./components/Hero";
+import Hero from "./components/hero";
 import Features from "./components/Features";
 
 import MarketDashboard from "./components/MarketDashboard"; // L'import propre
