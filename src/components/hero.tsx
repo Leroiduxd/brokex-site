@@ -30,7 +30,7 @@ export default function Hero() {
             <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center p-0.5 overflow-hidden">
               <img src="/logo.svg" alt="Logo" className="w-full h-full object-contain" />
             </div>
-            <span className="text-xl font-bold tracking-tight">Brokex</span>
+            <span className="text-xl font-bold tracking-tight">Brokex Protocol</span>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm font-medium text-blue-100/90">
             <a href="https://app.brokex.trade" className="hover:text-white transition-colors">CFD</a>
