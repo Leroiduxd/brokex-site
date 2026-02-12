@@ -1,21 +1,19 @@
 import Hero from "./components/hero";
+import MarketDashboard from "./components/MarketDashboard";
+import ValueProposition from "./components/ValueProposition"; // Nouvel import
 import Features from "./components/Features";
-
-import MarketDashboard from "./components/MarketDashboard"; // L'import propre
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <main className="bg-[#060010] min-h-screen w-full">
+    <main className="bg-white min-h-screen w-full">
       <Hero />
+      
       <MarketDashboard />
+      <ValueProposition />
+       {/* Placé ici pour expliquer le "Pourquoi" avant le "Comment" */}
       <Features />
-      
-      {/* Ton nouveau dashboard autonome */}
-      
-      
-
-      
-      <div className="h-[20vh]" />
+      <Footer />
     </main>
   );
 }

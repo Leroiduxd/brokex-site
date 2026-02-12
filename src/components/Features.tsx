@@ -38,20 +38,18 @@ const faqData = [
   }
 ];
 
-const AUTOPLAY_DURATION = 6000; // 6 secondes par question
+const AUTOPLAY_DURATION = 6000;
 
 export default function Features() {
   const [activeFaq, setActiveFaq] = useState(0);
   const [progress, setProgress] = useState(0);
 
-  // Gestion du défilement automatique
   useEffect(() => {
     setProgress(0);
     const interval = setInterval(() => {
       setActiveFaq((prev) => (prev + 1) % faqData.length);
     }, AUTOPLAY_DURATION);
 
-    // Animation de la barre de progression (interne à l'intervalle pour la fluidité)
     const progressInterval = setInterval(() => {
       setProgress((prev) => Math.min(prev + (100 / (AUTOPLAY_DURATION / 100)), 100));
     }, 100);
@@ -77,7 +75,10 @@ export default function Features() {
           
           {/* BLOC 1 : FEATURES */}
           <div className="w-full bg-[#101935] text-white">
-            <div className="py-16 md:py-20 px-8 md:px-12 lg:px-16">
+            {/* MODIF MOBILE : 'px-10' pour décoller de la ligne 'left-6'.
+                PC INTACT : 'md:px-12 lg:px-16' conservés de ta version.
+            */}
+            <div className="py-16 md:py-20 px-10 md:px-12 lg:px-16">
               <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-12 max-w-2xl leading-[1.1]">
                 The industry-standard for <br />
                 <span className="text-[#375BD2]">decentralized RWA trading</span>
@@ -104,41 +105,59 @@ export default function Features() {
           <div className="w-full bg-[#375BD2] text-white border-t border-white/10">
             <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[300px]">
               
-              {/* GAUCHE : QUESTIONS AVEC PROGRESS BAR */}
-              <div className="lg:col-span-5 border-r border-white/10 p-12 md:p-16 flex flex-col gap-12">
+              {/* GAUCHE : QUESTIONS */}
+              {/* MODIF MOBILE : p-10 pour l'alignement, md:p-16 conservé */}
+              <div className="lg:col-span-5 border-r border-white/10 p-10 md:p-16 flex flex-col gap-12">
                 {faqData.map((item, idx) => (
-                  <button
-                    key={item.id}
-                    onClick={() => setActiveFaq(idx)}
-                    className={`text-left transition-all duration-300 flex flex-col gap-3 group ${
-                      activeFaq === idx ? 'opacity-100' : 'opacity-40 hover:opacity-70'
-                    }`}
-                  >
-                    <div className="flex flex-col gap-1">
-                      <span className="text-[10px] font-mono">{item.id}</span>
-                      <span className={`text-lg tracking-tight ${activeFaq === idx ? 'font-bold' : 'font-normal'}`}>
-                        {item.question}
-                      </span>
-                    </div>
+                  <div key={item.id} className="flex flex-col gap-4">
+                    <button
+                      onClick={() => setActiveFaq(idx)}
+                      className={`text-left transition-all duration-300 flex flex-col gap-3 group ${
+                        activeFaq === idx ? 'opacity-100' : 'opacity-40 hover:opacity-70'
+                      }`}
+                    >
+                      <div className="flex flex-col gap-1">
+                        <span className="text-[10px] font-mono">{item.id}</span>
+                        <span className={`text-lg tracking-tight ${activeFaq === idx ? 'font-bold' : 'font-normal'}`}>
+                          {item.question}
+                        </span>
+                      </div>
 
-                    {/* BARRE DE PROGRESSION */}
-                    <div className="w-full h-[1px] bg-white/20 relative overflow-hidden">
+                      <div className="w-full h-[1px] bg-white/20 relative overflow-hidden">
+                        {activeFaq === idx && (
+                          <motion.div 
+                            className="absolute top-0 left-0 h-full bg-white"
+                            initial={{ width: "0%" }}
+                            animate={{ width: `${progress}%` }}
+                            transition={{ ease: "linear", duration: 0.1 }}
+                            style={{ height: '2px', top: '-0.5px' }}
+                          />
+                        )}
+                      </div>
+                    </button>
+
+                    {/* AJOUT MOBILE : La réponse s'affiche ici en accordéon sur petit écran */}
+                    <AnimatePresence>
                       {activeFaq === idx && (
-                        <motion.div 
-                          className="absolute top-0 left-0 h-full bg-white"
-                          initial={{ width: "0%" }}
-                          animate={{ width: `${progress}%` }}
-                          transition={{ ease: "linear", duration: 0.1 }}
-                          style={{ height: '2px', top: '-0.5px' }} // Un peu plus épaisse
-                        />
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          className="lg:hidden overflow-hidden"
+                        >
+                          <p className="text-sm text-blue-100 leading-relaxed pb-2 pt-2">
+                            {item.answer}
+                          </p>
+                        </motion.div>
                       )}
-                    </div>
-                  </button>
+                    </AnimatePresence>
+                  </div>
                 ))}
               </div>
 
-              {/* DROITE : RÉPONSE */}
-              <div className="lg:col-span-7 p-12 md:p-16 flex flex-col justify-start pt-[5.5rem] relative overflow-hidden">
+              {/* DROITE : RÉPONSE (Visible uniquement sur PC) */}
+              {/* AJOUT : 'hidden lg:flex' pour cacher ce bloc sur mobile */}
+              <div className="hidden lg:flex lg:col-span-7 p-12 md:p-16 flex-col justify-start pt-[5.5rem] relative overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeFaq}
