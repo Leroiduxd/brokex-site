@@ -222,9 +222,14 @@ export default function MarketDashboard() {
                         </div>
                       </div>
                   </div>
-                  <button className="hidden sm:flex items-center gap-2 text-sm font-bold text-[#375BD2] bg-white border border-slate-200 hover:bg-slate-50 px-4 py-2 rounded-lg transition-colors flex-shrink-0 shadow-sm">
-                      Trade <span className="hidden md:inline">this pair</span> <ArrowUpRight size={16} />
-                  </button>
+                  <a 
+                    href="https://app.brokex.trade" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="hidden sm:flex items-center gap-2 text-sm font-bold text-[#375BD2] bg-white border border-slate-200 hover:bg-slate-50 px-4 py-2 rounded-lg transition-colors flex-shrink-0 shadow-sm"
+                  >
+                    Trade <span className="hidden md:inline">this pair</span> <ArrowUpRight size={16} />
+                  </a>
                 </div>
               ) : (
                 <div className="p-8 h-24 bg-white/50 border-b border-slate-200" />

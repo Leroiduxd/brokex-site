@@ -27,7 +27,7 @@ export default function Hero() {
       <nav className="relative z-50 w-full px-6 md:px-12 py-5 flex items-center justify-between bg-[#375BD2] border-b border-white/20">
         <div className="flex items-center gap-12">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center p-1.5 overflow-hidden">
+            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center p-0.5 overflow-hidden">
               <img src="/logo.svg" alt="Logo" className="w-full h-full object-contain" />
             </div>
             <span className="text-xl font-bold tracking-tight">Brokex</span>
