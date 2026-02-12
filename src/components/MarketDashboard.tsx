@@ -62,10 +62,13 @@ const getAllAssets = (data: WebSocketMessage) => {
 
 export default function MarketDashboard() {
   const [data, setData] = useState<WebSocketMessage>({});
-  const [connected, setConnected] = useState(false);
+  // Corrigé : On préfixe par _ pour indiquer à TS que la variable est intentionnellement inutilisée pour le moment
+  const [_connected, setConnected] = useState(false);
   const wsRef = useRef<WebSocket | null>(null);
-  const reconnectTimeoutRef = useRef<NodeJS.Timeout>();
-
+  
+  // Corrigé : Utilisation de ReturnType pour éviter l'erreur de namespace NodeJS et initialisation à null
+  const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  
   const [selectedAsset, setSelectedAsset] = useState<any>(null);
   const [chartData, setChartData] = useState<any[]>([]);
   const [loadingChart, setLoadingChart] = useState(false);
@@ -132,7 +135,7 @@ export default function MarketDashboard() {
   };
 
   return (
-    <section className="w-full h-screen bg-white font-['Space_Grotesk'] text-[#0c162c] overflow-hidden flex flex-col relative">
+    <section id="market-dashboard" className="w-full h-screen bg-white font-['Space_Grotesk'] text-[#0c162c] overflow-hidden flex flex-col relative">
       <style>{`
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -142,9 +145,6 @@ export default function MarketDashboard() {
       <div className="absolute bottom-10 left-0 w-full h-px bg-slate-200 z-30" />
 
       {/* CONTENEUR PRINCIPAL */}
-      {/* MODIFICATION ICI : px-6 au lieu de px-4 
-          Cela aligne les bordures avec le Hero qui utilise 'left-6' (24px)
-      */}
       <div className="flex-1 w-full px-6 md:px-12 flex flex-col min-h-0 relative z-10">
         
         {/* BOITE INTERNE */}
@@ -152,7 +152,7 @@ export default function MarketDashboard() {
           
           <div className="flex flex-col lg:flex-row flex-1 overflow-hidden">
             
-            {/* --- PARTIE LISTE (BAS sur Mobile) --- */}
+            {/* --- PARTIE GAUCHE/BAS (LISTE) --- */}
             <div className="order-2 lg:order-1 w-full lg:w-1/3 h-auto lg:h-full border-t lg:border-t-0 lg:border-r border-slate-200 flex flex-col overflow-hidden bg-white/50 backdrop-blur-sm z-20">
               
               <div className="hidden lg:block p-4 border-b border-slate-200 flex-shrink-0">
@@ -162,7 +162,6 @@ export default function MarketDashboard() {
                 </div>
               </div>
               
-              {/* Scroll Horizontal Mobile / Vertical PC */}
               <div className="flex-1 flex flex-row lg:flex-col overflow-x-auto lg:overflow-x-hidden lg:overflow-y-auto no-scrollbar">
                 {allAssets.map((asset) => (
                   <button
