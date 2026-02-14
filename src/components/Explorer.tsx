@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Activity, Users, Hash, ArrowLeft, ExternalLink } from 'lucide-react';
+import { Search, Activity, Users, Hash, ArrowLeft } from 'lucide-react';
 
 const API_BASE = "https://data.brokex.trade/api";
 
@@ -11,7 +11,7 @@ export default function Explorer() {
     
     // Search states
     const [searchResult, setSearchResult] = useState<any>(null);
-    const [isSearching, setIsSearching] = useState(false);
+    const [_isSearching, setIsSearching] = useState(false);
 
     useEffect(() => {
         // Global Stats
