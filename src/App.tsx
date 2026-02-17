@@ -4,9 +4,10 @@ import MarketDashboard from "./components/MarketDashboard";
 import ValueProposition from "./components/ValueProposition";
 import Features from "./components/Features";
 import Footer from "./components/Footer";
-import Explorer from "./components/Explorer"; // On importe la nouvelle page
+import Explorer from "./components/Explorer";
+import Vault from "./components/Vault"; // Import de ta nouvelle page Vault
 
-// On regroupe ton accueil actuel dans un composant pour ne rien changer à l'ordre
+// On regroupe ton accueil actuel dans un composant
 const HomePage = () => (
   <main className="bg-white min-h-screen w-full">
     <Hero />
@@ -21,11 +22,14 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Page d'accueil actuelle (inchangée) */}
+        {/* Home Page */}
         <Route path="/" element={<HomePage />} />
 
-        {/* Nouvelle page accessible sur brokex.trade/explorer */}
+        {/* Explorer Page */}
         <Route path="/explorer" element={<Explorer />} />
+
+        {/* Vault Page accessible via brokex.trade/vault */}
+        <Route path="/vault" element={<Vault />} />
       </Routes>
     </Router>
   );
