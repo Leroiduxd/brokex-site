@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { 
-  FileCode, ShieldCheck, Zap, Menu, X, Scale, Lock, Eye, 
-  BarChart3, CheckCircle2, BookOpen, Terminal, ChevronRight, 
+  FileCode, ShieldCheck, Zap, Menu, Scale, Lock, Eye, 
+  BarChart3, Terminal, ChevronRight, 
   ChevronLeft, Info, TrendingUp, DollarSign, ShieldAlert
 } from 'lucide-react';
 
