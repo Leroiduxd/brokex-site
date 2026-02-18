@@ -114,7 +114,7 @@ export default function Vault() {
                 <div className="lg:hidden sticky top-0 z-30 bg-white border-b border-slate-200 px-4 py-3 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                         <div className="w-9 h-9 bg-[#375BD2] rounded-lg flex items-center justify-center flex-shrink-0 shadow-md">
-                            <img src="/logo.svg" alt="Brokex" className="w-5 h-5" />
+                            <img src="/logow.svg" alt="Brokex" className="w-5 h-5" />
                         </div>
                         <span className="font-bold text-lg text-slate-900">Vault Docs</span>
                     </div>
